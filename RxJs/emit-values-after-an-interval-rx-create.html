@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RxJs</title>
+</head>
+<body>
+</body>
+<!-- <script src="https://code.jquery.com/jquery-3.1.0.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.1/Rx.js"></script>
+<script type="text/javascript">
+
+// emit data every 500ms after 3s and display on screen
+
+var subscription = 
+	Rx.Observable.create(observer => {
+		const INTERVAL = 500;
+		const STARTUP = 1000;
+		let val = 0;
+		function loop() {
+			if(++val<=20){
+				observer.next(val);
+				setTimeout(loop,INTERVAL);
+			}else{
+				observer.complete();
+			}
+		}
+		setTimeout(loop,STARTUP);
+	})
+
+subscription.subscribe(console.log);
+		
+
+</script>
+</html>
